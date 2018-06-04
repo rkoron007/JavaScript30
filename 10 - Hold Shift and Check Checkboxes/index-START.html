@@ -53,6 +53,7 @@
 
 
   </style>
+
    <!--
    The following is a common layout you would see in an email client.
 
@@ -99,6 +100,37 @@
   </div>
 
 <script>
+  const checkboxs = [...document.querySelectorAll('input')];
+
+  let lastChecked; 
+
+
+  function handleCheck(e) {
+    let inBetween = false;
+
+
+    if (e.shiftKey && this.checked) {
+      checkboxs.forEach((box) => {
+        if (box === this || box === lastChecked){
+          inBetween = !inBetween;
+        }
+
+        if (inBetween){
+          box.checked = true;
+        } 
+      });
+    }
+
+
+    lastChecked = this;
+  }
+
+
+  checkboxs.forEach((item) => {
+    item.addEventListener('click', handleCheck);
+  })
+
+
 </script>
 </body>
 </html>
